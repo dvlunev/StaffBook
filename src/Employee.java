@@ -47,17 +47,22 @@ public class Employee {
         this.id = id;
     }
 
+    // Вопрос 4 Не очень нравится как я реализовал, есть ли какой то способ по другому это сделать и реализуются ли эти
+    // проверки здесь в туСтринг?
     @Override
-    public String toString() { // Не очень нравится как я реализовал, есть ли какой то способ по другому это сделать и реализуются ли эти проверки здесь в туСтринг?
+    public String toString() {
         if (fullName.equals("") && departmentNumber > 0 && departmentNumber < 6 && salary > 0) {
             return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника";
         } else if (fullName.equals("") && (departmentNumber <= 0 || departmentNumber >= 6) && salary > 0) {
-            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " + "- Введите корректный номер отдела от 1 до 5";
+            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " +
+                    "- Введите корректный номер отдела от 1 до 5";
         } else if (fullName.equals("") && (departmentNumber <= 0 || departmentNumber >= 6) && salary <= 0) {
-            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " + "- Введите корректный номер отдела от 1 до 5 "
+            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " +
+                    "- Введите корректный номер отдела от 1 до 5 "
                     + "- Введите корректный размер заработной платы";
         } else if (fullName.equals("") && departmentNumber > 0 && departmentNumber < 6 && salary <= 0) {
-            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " + "- Введите корректный размер заработной платы";
+            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " +
+                    "- Введите корректный размер заработной платы";
         } else if (!fullName.equals("") && (departmentNumber <= 0 || departmentNumber >= 6) && salary <= 0) {
             return "id " + id + " Сотрудник " + fullName + " - Введите корректный номер отдела от 1 до 5 " +
                     "- Введите корректный размер заработной платы";

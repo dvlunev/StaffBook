@@ -18,16 +18,6 @@ public class EmployeeBook {
     public final Random RANDOM = new Random();
 
     public void addEmployee(String fullName, int departmentNumber, double salary) {
-        /*if (size >= employees.length) {
-            System.out.println("Штат укомплектован, необходимо изменить штатное расписание");
-        }
-        for (Employee employee : employees) {
-            if (employee == null) {
-                employee = new Employee(fullName, departmentNumber, salary);
-                employees[size++] = employee;
-                break;
-            }
-        }*/
         int i = 0;
         for (Employee employee : employees) {
             if (employee == null && size < employees.length) {
@@ -56,8 +46,10 @@ public class EmployeeBook {
                 employee = new Employee(SURNAMES[RANDOM.nextInt(SURNAMES.length)] + " " +
                         NAMES[RANDOM.nextInt(NAMES.length)] + " " +
                         PATRONYMICNAME[RANDOM.nextInt(PATRONYMICNAME.length)],
-                        RANDOM.nextInt(4) + 1, // На разборе именно этот метод показывали random.nextInt, но с 2мя параметрами,
-                        RANDOM.nextInt(50_000) + 50_000);// а у меня он позволяет 1 ввести только, почему так?
+                        RANDOM.nextInt(4) + 1,
+                        RANDOM.nextInt(50_000) + 50_000);
+                /* Вопрос 2 На разборе именно этот метод показывали random.nextInt, но с 2мя параметрами,
+                а у меня он позволяет 1 ввести только, почему так?*/
                 employees[size++] = employee;
                 break;
             } else if (employee == null && size == employees.length) {
@@ -112,7 +104,8 @@ public class EmployeeBook {
         double sumSalary = 0;
         for (Employee employee : employees) {
             if (employee != null && (employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0) &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getDepartmentNumber() == departmentNumber) {
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 &&
+                    employee.getDepartmentNumber() == departmentNumber) {
                 sumSalary = sumSalary + employee.getSalary();
             }
         }
@@ -124,7 +117,8 @@ public class EmployeeBook {
         Employee minSalaryEmployee = null;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0 &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() < minSalary) {
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() <
+                    minSalary) {
                 minSalary = employee.getSalary();
                 minSalaryEmployee = employee;
             }
@@ -137,7 +131,8 @@ public class EmployeeBook {
         Employee minSalaryEmployee = null;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0 &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() < minSalary && employee.getDepartmentNumber() == departmentNumber) {
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() <
+                    minSalary && employee.getDepartmentNumber() == departmentNumber) {
                 minSalary = employee.getSalary();
                 minSalaryEmployee = employee;
             }
@@ -150,7 +145,8 @@ public class EmployeeBook {
         Employee maxSalaryEmployee = null;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0 &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() > maxSalary) {
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() >
+                    maxSalary) {
                 maxSalary = employee.getSalary();
                 maxSalaryEmployee = employee;
             }
@@ -163,7 +159,8 @@ public class EmployeeBook {
         Employee maxSalaryEmployee = null;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0 &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() > maxSalary && employee.getDepartmentNumber() == departmentNumber) {
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() >
+                    maxSalary && employee.getDepartmentNumber() == departmentNumber) {
                 maxSalary = employee.getSalary();
                 maxSalaryEmployee = employee;
             }
@@ -190,7 +187,8 @@ public class EmployeeBook {
         int employeesCount = 0;
         for (Employee employee : employees) {
             if (employee != null && (employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0) &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getDepartmentNumber() == departmentNumber) {
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 &&
+                    employee.getDepartmentNumber() == departmentNumber) {
                 employeesCount++;
             }
         }
@@ -225,7 +223,8 @@ public class EmployeeBook {
     public void indexationSalaryOfDepartmenEmployees(int departmentNumber, double indexationPersent) {
         for (Employee employee : employees) {
             if (employee != null && (employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0) &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getDepartmentNumber() == departmentNumber) {
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 &&
+                    employee.getDepartmentNumber() == departmentNumber) {
                 employee.setSalary(employee.getSalary() * (indexationPersent/100 + 1));
             }
         }
@@ -235,8 +234,10 @@ public class EmployeeBook {
         System.out.println("Список сотрудников с зарплатой меньше " + numberSalary);
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0 &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() < numberSalary) {
-                System.out.println(employee.toString().replace(" отдел " + employee.getDepartmentNumber(), ""));
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() <
+                    numberSalary) {
+                System.out.println(employee.toString().replace(" отдел " + employee.getDepartmentNumber(),
+                        ""));
             }
         }
     }
@@ -245,8 +246,10 @@ public class EmployeeBook {
         System.out.println("Список сотрудников с зарплатой больше или равно " + numberSalary);
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0 &&
-                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getSalary() >= numberSalary) {
-                System.out.println(employee.toString().replace(" отдел " + employee.getDepartmentNumber(), ""));
+                    !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 &&
+                    employee.getSalary() >= numberSalary) {
+                System.out.println(employee.toString().replace(" отдел " + employee.getDepartmentNumber(),
+                        ""));
             }
         }
     }
@@ -254,8 +257,8 @@ public class EmployeeBook {
     public void removeEmployee(String fullName, int id) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getFullName().equals(fullName) && employees[i].getId() == id) {
-                System.out.println("id " + employees[i].getId() + " Сотрудник " + employees[i].getFullName() + " удален(а)");
-                // System.arraycopy(employees, i + 1, employees, i, size - i - 1);
+                System.out.println("id " + employees[i].getId() + " Сотрудник " + employees[i].getFullName() +
+                        " удален(а)");
                 employees[i] = null;
                 return;
             }
@@ -265,18 +268,20 @@ public class EmployeeBook {
     public void findAndEditFullNameEmployee(int id, String newFullName) { // Добавил, так как может быть fullName = ""
         for (Employee employee : employees) {
             if (employee != null && employee.getId() == id) {
-                System.out.println("Имя сотрудника изменено с " + employee.getFullName() + " id " + employee.getId() + " на " + newFullName);
+                System.out.println("Имя сотрудника изменено с " + employee.getFullName() + " id " + employee.getId() +
+                        " на " + newFullName);
                 employee.setFullName(newFullName);
                 return;
             }
         }
     }
 
-    // "Придумать архитектуру. Сделать или два метода, или один, но продумать его." - это я не понял что значит!?
+    // Вопрос 3 "Придумать архитектуру. Сделать или два метода, или один, но продумать его." - это я не понял что значит!?
     public void findAndEditSalaryEmployee(String fullName, double newSalary) {
         for (Employee employee : employees) {
             if (employee.getFullName().equals(fullName)) {
-                System.out.println("Заработная плата id " + employee.getId() + " Сотрудника " + employee.getFullName() + " изменена с " + employee.getSalary() + " на " + newSalary);
+                System.out.println("Заработная плата id " + employee.getId() + " Сотрудника " + employee.getFullName() +
+                        " изменена с " + employee.getSalary() + " на " + newSalary);
                 employee.setSalary(newSalary);
                 return;
             }
@@ -286,7 +291,8 @@ public class EmployeeBook {
     public void findAndEditDepartmentEmployee(String fullName, int newDepartmentNumber) {
         for (Employee employee : employees) {
             if (employee.getFullName().equals(fullName)) {
-                System.out.println("Изменился отдел у id " + employee.getId() + " Сотрудника " + employee.getFullName() + " с " + employee.getDepartmentNumber() + " на " + newDepartmentNumber);
+                System.out.println("Изменился отдел у id " + employee.getId() + " Сотрудника " + employee.getFullName() +
+                        " с " + employee.getDepartmentNumber() + " на " + newDepartmentNumber);
                 employee.setDepartmentNumber(newDepartmentNumber);
                 return;
             }
@@ -299,7 +305,8 @@ public class EmployeeBook {
             System.out.println("Список сотрудников отдела " + departmentNumber);
             for (Employee employee : employees) {
                 if (employee != null && (employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0) &&
-                        !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 && employee.getDepartmentNumber() == departmentNumber) {
+                        !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 &&
+                        employee.getDepartmentNumber() == departmentNumber) {
                     System.out.println(number + ") " + employee.getFullName());
                     number++;
                 }
