@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 
@@ -12,10 +13,10 @@ public class EmployeeBook {
         this.employees = new Employee[10];
     }
 
-    private final String[] NAMES = {"Иван", "Петр", "Сергей"};
-    private final String[] SURNAMES = {"Иванов", "Петров", "Сергеев"};
-    private final String[] PATRONYMICNAME = {"Иванович", "Петрович", "Сергеевич"};
-    public final Random RANDOM = new Random();
+    private final String[] names = {"Иван", "Петр", "Сергей"};
+    private final String[] surNames = {"Иванов", "Петров", "Сергеев"};
+    private final String[] patronymicName = {"Иванович", "Петрович", "Сергеевич"};
+    public final Random random = new Random();
 
     public void addEmployee(String fullName, int departmentNumber, double salary) {
         int i = 0;
@@ -43,21 +44,19 @@ public class EmployeeBook {
         int i = 0;
         for (Employee employee : employees) {
             if (employee == null && size < employees.length) {
-                employee = new Employee(SURNAMES[RANDOM.nextInt(SURNAMES.length)] + " " +
-                        NAMES[RANDOM.nextInt(NAMES.length)] + " " +
-                        PATRONYMICNAME[RANDOM.nextInt(PATRONYMICNAME.length)],
-                        RANDOM.nextInt(4) + 1,
-                        RANDOM.nextInt(50_000) + 50_000);
-                /* Вопрос 2 На разборе именно этот метод показывали random.nextInt, но с 2мя параметрами,
-                а у меня он позволяет 1 ввести только, почему так?*/
+                employee = new Employee(surNames[random.nextInt(surNames.length)] + " " +
+                        names[random.nextInt(names.length)] + " " +
+                        patronymicName[random.nextInt(patronymicName.length)],
+                        random.nextInt(4) + 1,
+                        random.nextInt(50_000) + 50_000);
                 employees[size++] = employee;
                 break;
             } else if (employee == null && size == employees.length) {
-                employee = new Employee(SURNAMES[RANDOM.nextInt(SURNAMES.length)] + " " +
-                        NAMES[RANDOM.nextInt(NAMES.length)] + " " +
-                        PATRONYMICNAME[RANDOM.nextInt(PATRONYMICNAME.length)],
-                        RANDOM.nextInt(4) + 1,
-                        RANDOM.nextInt(50_000) + 50_000);
+                employee = new Employee(surNames[random.nextInt(surNames.length)] + " " +
+                        names[random.nextInt(names.length)] + " " +
+                        patronymicName[random.nextInt(patronymicName.length)],
+                        random.nextInt(4) + 1,
+                        random.nextInt(50_000) + 50_000);
                 employees[i] = employee;
                 employee.setId(i + 1);
                 break;
@@ -256,7 +255,7 @@ public class EmployeeBook {
 
     public void removeEmployee(String fullName, int id) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getFullName().equals(fullName) && employees[i].getId() == id) {
+            if (!fullName.equals("") && employees[i].getFullName().equals(fullName) && employees[i].getId() == id) {
                 System.out.println("id " + employees[i].getId() + " Сотрудник " + employees[i].getFullName() +
                         " удален(а)");
                 employees[i] = null;
@@ -276,12 +275,12 @@ public class EmployeeBook {
         }
     }
 
-    // Вопрос 3 "Придумать архитектуру. Сделать или два метода, или один, но продумать его." - это я не понял что значит!?
     public void findAndEditSalaryEmployee(String fullName, double newSalary) {
         for (Employee employee : employees) {
-            if (employee.getFullName().equals(fullName)) {
-                System.out.println("Заработная плата id " + employee.getId() + " Сотрудника " + employee.getFullName() +
-                        " изменена с " + employee.getSalary() + " на " + newSalary);
+            if (employee != null && employee.getFullName().equals(fullName)) {
+                System.out.print("Заработная плата id " + employee.getId() + " Сотрудника " + employee.getFullName());
+                System.out.printf(Locale.US," изменена с %.2f%n",employee.getSalary());
+                System.out.println(" на " + newSalary);
                 employee.setSalary(newSalary);
                 return;
             }
@@ -290,7 +289,7 @@ public class EmployeeBook {
 
     public void findAndEditDepartmentEmployee(String fullName, int newDepartmentNumber) {
         for (Employee employee : employees) {
-            if (employee.getFullName().equals(fullName)) {
+            if (employee != null && employee.getFullName().equals(fullName)) {
                 System.out.println("Изменился отдел у id " + employee.getId() + " Сотрудника " + employee.getFullName() +
                         " с " + employee.getDepartmentNumber() + " на " + newDepartmentNumber);
                 employee.setDepartmentNumber(newDepartmentNumber);

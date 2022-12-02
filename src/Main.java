@@ -29,15 +29,7 @@ public class Main {
                 System.out.println("Сотрудник с минимальной заработной платой: " + employeeBook.findMaxSalary());
                 System.out.println();
 
-                System.out.println("Средняя заработная плата составляет " + employeeBook.countAverageSalary());
-                /*Вопрос 1 На разборе показывали именно этот код, а он не работает, почему?
-                System.out.printf(Locale.US,"Средняя заработная плата составляет %.2f%n" + countAverageSalary());
-                Выдает эксепшн:
-                Средняя заработная плата составляет Exception in thread "main" java.util.MissingFormatArgumentException: Format specifier '%.2f'
-                at java.base/java.util.Formatter.format(Formatter.java:2672)
-                at java.base/java.io.PrintStream.format(PrintStream.java:1111)
-                at java.base/java.io.PrintStream.printf(PrintStream.java:1001)
-                at Main.main(Main.java:29)*/
+                System.out.printf(Locale.US ,"Средняя заработная плата составляет %.2f%n", employeeBook.countAverageSalary());
                 System.out.println();
 
                 employeeBook.printEmployessNames();
@@ -59,11 +51,13 @@ public class Main {
                         employeeBook.findMaxSalaryOfDepartment(departmentNumber));
                 System.out.println();
 
-                System.out.println("Фонд оплаты труда на месяц по отделу " + departmentNumber + " составляет " +
+                System.out.print("Фонд оплаты труда на месяц по отделу " + departmentNumber);
+                System.out.printf(Locale.US," составляет %.2f%n",
                         employeeBook.countSumSalaryOfDepartment(departmentNumber));
                 System.out.println();
 
-                System.out.println("Средняя заработная плата по отделу " + departmentNumber + " составляет " +
+                System.out.print("Средняя заработная плата по отделу " + departmentNumber);
+                System.out.printf(Locale.US, " составляет %.2f%n",
                         employeeBook.countAverageSalaryOfDepartment(departmentNumber));
                 System.out.println();
 

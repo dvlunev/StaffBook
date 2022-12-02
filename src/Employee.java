@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Employee {
@@ -7,19 +9,25 @@ public class Employee {
     private static int count = 1;
     private int id;
 
+    private DecimalFormat dF = new DecimalFormat( "#.##" );
+
     public Employee(String fullName, int departmentNumber, double salary) {
             this.fullName = fullName;
+        if (departmentNumber > 0 && departmentNumber < 6) {
             this.departmentNumber = departmentNumber;
+        }
+        if (salary > 0) {
             this.salary = salary;
+        }
             this.id = count++;
     }
 
     public String getFullName() {
-        return fullName;
+            return fullName;
     }
 
     public int getDepartmentNumber() {
-        return departmentNumber;
+            return departmentNumber;
     }
 
     public double getSalary() {
@@ -28,11 +36,10 @@ public class Employee {
 
     public int getId() {
         return id;
-
     }
 
     public void setFullName(String fullName) { // Так как сделана проверка на пустое имя, то должна быть возможность его изменения
-        this.fullName = fullName;
+            this.fullName = fullName;
     }
 
     public void setDepartmentNumber(int departmentNumber) {
@@ -47,32 +54,34 @@ public class Employee {
         this.id = id;
     }
 
-    // Вопрос 4 Не очень нравится как я реализовал, есть ли какой то способ по другому это сделать и реализуются ли эти
-    // проверки здесь в туСтринг?
+    public Object fullNameInputControl() {
+        if (!fullName.equals("")) {
+            return fullName;
+        } else {
+            return "- Введите ФИО сотрудника -";
+        }
+    }
+
+    public Object departmentInputControl() {
+        if (departmentNumber > 0 && departmentNumber < 6) {
+            return departmentNumber;
+        } else {
+            return "- Введите корректный номер отдела от 1 до 5 -";
+        }
+    }
+
+    public Object salaryInputControl() {
+        if (salary > 0) {
+            return dF.format(salary);
+        } else {
+            return "- Введите корректный размер заработной платы -";
+        }
+    }
+
     @Override
     public String toString() {
-        if (fullName.equals("") && departmentNumber > 0 && departmentNumber < 6 && salary > 0) {
-            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника";
-        } else if (fullName.equals("") && (departmentNumber <= 0 || departmentNumber >= 6) && salary > 0) {
-            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " +
-                    "- Введите корректный номер отдела от 1 до 5";
-        } else if (fullName.equals("") && (departmentNumber <= 0 || departmentNumber >= 6) && salary <= 0) {
-            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " +
-                    "- Введите корректный номер отдела от 1 до 5 "
-                    + "- Введите корректный размер заработной платы";
-        } else if (fullName.equals("") && departmentNumber > 0 && departmentNumber < 6 && salary <= 0) {
-            return "id " + id + " Сотрудник " + "- Введите ФИО сотрудника " +
-                    "- Введите корректный размер заработной платы";
-        } else if (!fullName.equals("") && (departmentNumber <= 0 || departmentNumber >= 6) && salary <= 0) {
-            return "id " + id + " Сотрудник " + fullName + " - Введите корректный номер отдела от 1 до 5 " +
-                    "- Введите корректный размер заработной платы";
-        } else if (!fullName.equals("") && (departmentNumber <= 0 || departmentNumber >= 6) && salary > 0) {
-            return "id " + id + " Сотрудник " + fullName + " - Введите корректный номер отдела от 1 до 5";
-        } else if (!fullName.equals("") && departmentNumber > 0 && departmentNumber < 6 && salary <= 0) {
-            return "id " + id + " Сотрудник " + fullName + " - Введите корректный размер заработной платы";
-        } else {
-            return "id " + id + " Сотрудник " + fullName + " отдел " + departmentNumber + " зарплата " + salary;
-        }
+        return "id " + id + " Сотрудник " + fullNameInputControl() + " отдел " + departmentInputControl() +
+                " зарплата " + salaryInputControl();
     }
 
     @Override
