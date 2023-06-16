@@ -1,8 +1,12 @@
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * The class describing the book of employees and the necessary methods
+ *
+ * @see Employee
+ */
 public class EmployeeBook {
 
     private final Employee[] employees;
@@ -18,6 +22,13 @@ public class EmployeeBook {
     private final String[] patronymicName = {"Иванович", "Петрович", "Сергеевич"};
     public final Random random = new Random();
 
+    /**
+     * The method adds a new Employee
+     *
+     * @param fullName         of an employee
+     * @param departmentNumber where an employee is working
+     * @param salary           of an employee
+     */
     public void addEmployee(String fullName, int departmentNumber, double salary) {
         int i = 0;
         for (Employee employee : employees) {
@@ -40,6 +51,9 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method generates a new Employee
+     */
     public void generateEmployee() {
         int i = 0;
         for (Employee employee : employees) {
@@ -70,6 +84,9 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method prints the list of all Employees
+     */
     public void printAllEmployees() {
         System.out.println("Список сотрудников");
         for (Employee employee : employees) {
@@ -79,6 +96,11 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method prints the list of Employees from a particular department
+     *
+     * @param departmentNumber
+     */
     public void printAllEmployeesOfDepartmen(int departmentNumber) {
         System.out.println("Список сотрудников отдела " + departmentNumber);
         for (Employee employee : employees) {
@@ -88,6 +110,11 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method counts the salary sum of all Employees
+     *
+     * @return double
+     */
     public double countSumSalary() {
         double sumSalary = 0;
         for (Employee employee : employees) {
@@ -99,6 +126,12 @@ public class EmployeeBook {
         return sumSalary;
     }
 
+    /**
+     * The method counts the salary sum of Employees from a particular department
+     *
+     * @param departmentNumber
+     * @return double
+     */
     public double countSumSalaryOfDepartment(int departmentNumber) {
         double sumSalary = 0;
         for (Employee employee : employees) {
@@ -111,6 +144,11 @@ public class EmployeeBook {
         return sumSalary;
     }
 
+    /**
+     * The method finds an Employee with minimum salary
+     *
+     * @return Employee
+     */
     public Employee findMinSalary() {
         double minSalary = Integer.MAX_VALUE;
         Employee minSalaryEmployee = null;
@@ -125,6 +163,12 @@ public class EmployeeBook {
         return minSalaryEmployee;
     }
 
+    /**
+     * The method finds an Employee from particular department with a minimum salary
+     *
+     * @param departmentNumber
+     * @return Employee
+     */
     public Employee findMinSalaryOfDepartment(int departmentNumber) {
         double minSalary = Integer.MAX_VALUE;
         Employee minSalaryEmployee = null;
@@ -139,6 +183,11 @@ public class EmployeeBook {
         return minSalaryEmployee;
     }
 
+    /**
+     * The method finds an Employee with a maximum salary
+     *
+     * @return Employee
+     */
     public Employee findMaxSalary() {
         double maxSalary = Integer.MIN_VALUE;
         Employee maxSalaryEmployee = null;
@@ -153,6 +202,12 @@ public class EmployeeBook {
         return maxSalaryEmployee;
     }
 
+    /**
+     * The method finds an Employee from a particular department with a maximum salary
+     *
+     * @param departmentNumber
+     * @return Employee
+     */
     public Employee findMaxSalaryOfDepartment(int departmentNumber) {
         double maxSalary = Integer.MIN_VALUE;
         Employee maxSalaryEmployee = null;
@@ -167,6 +222,11 @@ public class EmployeeBook {
         return maxSalaryEmployee;
     }
 
+    /**
+     * The method counts the average salary of all Employees
+     *
+     * @return double
+     */
     public double countAverageSalary() {
         int employeesCount = 0;
         for (Employee employee : employees) {
@@ -182,6 +242,12 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method counts the average salary of Employees from a particular department
+     *
+     * @param departmentNumber
+     * @return double
+     */
     public double countAverageSalaryOfDepartment(int departmentNumber) {
         int employeesCount = 0;
         for (Employee employee : employees) {
@@ -198,6 +264,9 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method prints the list of Employees names
+     */
     public void printEmployessNames() {
         int number = 0;
         System.out.println("Список сотрудников");
@@ -210,25 +279,41 @@ public class EmployeeBook {
         }
     }
 
-    public void indexationSalaryEmployees(double indexationPersent) {
+    /**
+     * The method indexes salaries of all Employees with a particular indexation percent
+     *
+     * @param indexationPercent
+     */
+    public void indexationSalaryEmployees(double indexationPercent) {
         for (Employee employee : employees) {
             if (employee != null && (employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0) &&
                     !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0) {
-                employee.setSalary(employee.getSalary() * (indexationPersent/100 + 1));
+                employee.setSalary(employee.getSalary() * (indexationPercent / 100 + 1));
             }
         }
     }
 
-    public void indexationSalaryOfDepartmenEmployees(int departmentNumber, double indexationPersent) {
+    /**
+     * The method indexes salaries of Employees with a particular department with a particular indexation percent
+     *
+     * @param departmentNumber
+     * @param indexationPercent
+     */
+    public void indexationSalaryOfDepartmenEmployees(int departmentNumber, double indexationPercent) {
         for (Employee employee : employees) {
             if (employee != null && (employee.getDepartmentNumber() <= 5 && employee.getDepartmentNumber() > 0) &&
                     !Objects.equals(employee.getFullName(), "") && employee.getSalary() > 0 &&
                     employee.getDepartmentNumber() == departmentNumber) {
-                employee.setSalary(employee.getSalary() * (indexationPersent/100 + 1));
+                employee.setSalary(employee.getSalary() * (indexationPercent / 100 + 1));
             }
         }
     }
 
+    /**
+     * The method finds employees with less than a particular salary
+     *
+     * @param numberSalary
+     */
     public void findLessOfNumberSalary(double numberSalary) {
         System.out.println("Список сотрудников с зарплатой меньше " + numberSalary);
         for (Employee employee : employees) {
@@ -241,6 +326,11 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method finds employees with more than a particular salary
+     *
+     * @param numberSalary
+     */
     public void findMorOfNumberSalary(double numberSalary) {
         System.out.println("Список сотрудников с зарплатой больше или равно " + numberSalary);
         for (Employee employee : employees) {
@@ -253,6 +343,12 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method removes an Employee
+     *
+     * @param fullName of an employee
+     * @param id       of an employee
+     */
     public void removeEmployee(String fullName, int id) {
         for (int i = 0; i < employees.length; i++) {
             if (!fullName.equals("") && employees[i].getFullName().equals(fullName) && employees[i].getId() == id) {
@@ -264,6 +360,12 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method finds and edits a full name of an Employee
+     *
+     * @param id          of an employee
+     * @param newFullName of an employee
+     */
     public void findAndEditFullNameEmployee(int id, String newFullName) { // Добавил, так как может быть fullName = ""
         for (Employee employee : employees) {
             if (employee != null && employee.getId() == id) {
@@ -275,11 +377,17 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method finds and edits a salary of an Employee
+     *
+     * @param fullName  of an employee
+     * @param newSalary of an employee
+     */
     public void findAndEditSalaryEmployee(String fullName, double newSalary) {
         for (Employee employee : employees) {
             if (employee != null && employee.getFullName().equals(fullName)) {
                 System.out.print("Заработная плата id " + employee.getId() + " Сотрудника " + employee.getFullName());
-                System.out.printf(Locale.US," изменена с %.2f%n",employee.getSalary());
+                System.out.printf(Locale.US, " изменена с %.2f%n", employee.getSalary());
                 System.out.println(" на " + newSalary);
                 employee.setSalary(newSalary);
                 return;
@@ -287,6 +395,12 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method finds and edits a department of an Employee
+     *
+     * @param fullName            of an employee
+     * @param newDepartmentNumber of an employee
+     */
     public void findAndEditDepartmentEmployee(String fullName, int newDepartmentNumber) {
         for (Employee employee : employees) {
             if (employee != null && employee.getFullName().equals(fullName)) {
@@ -298,6 +412,9 @@ public class EmployeeBook {
         }
     }
 
+    /**
+     * The method prints the list of full names Employees from all departments
+     */
     public void printAllDepartmentsAndFullNamesEmployees() {
         for (int departmentNumber = 1; departmentNumber < 5; departmentNumber++) {
             int number = 1;

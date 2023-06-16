@@ -1,7 +1,9 @@
 import java.text.DecimalFormat;
-import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * The class describing an employee
+ */
 public class Employee {
     private String fullName; // Так как сделана проверка на пустое имя, то должна быть возможность его изменения
     private int departmentNumber;
@@ -9,25 +11,25 @@ public class Employee {
     private static int count = 1;
     private int id;
 
-    private DecimalFormat dF = new DecimalFormat( "#.##" );
+    private DecimalFormat dF = new DecimalFormat("#.##");
 
     public Employee(String fullName, int departmentNumber, double salary) {
-            this.fullName = fullName;
+        this.fullName = fullName;
         if (departmentNumber > 0 && departmentNumber < 6) {
             this.departmentNumber = departmentNumber;
         }
         if (salary > 0) {
             this.salary = salary;
         }
-            this.id = count++;
+        this.id = count++;
     }
 
     public String getFullName() {
-            return fullName;
+        return fullName;
     }
 
     public int getDepartmentNumber() {
-            return departmentNumber;
+        return departmentNumber;
     }
 
     public double getSalary() {
@@ -39,7 +41,7 @@ public class Employee {
     }
 
     public void setFullName(String fullName) { // Так как сделана проверка на пустое имя, то должна быть возможность его изменения
-            this.fullName = fullName;
+        this.fullName = fullName;
     }
 
     public void setDepartmentNumber(int departmentNumber) {
